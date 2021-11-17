@@ -3,7 +3,7 @@
 ## Date: 11/17/2021
 ### By: Aaron Slaughter
 
-#### [GitHub](https://github.com/Slafter) | [LinkedIn](https://www.linkedin.com/in/aaron-slaughter-085b44b5/)
+#### [GitHub](https://github.com/aaronslaughter) | [LinkedIn](https://www.linkedin.com/in/aaron-slaughter-085b44b5/)
 ***
 
 ### Description:
