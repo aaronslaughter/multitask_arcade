@@ -45,11 +45,47 @@ section {
   background-color: rgb(36, 36, 36);
 }
 
+.top-row {
+  grid-row-start: 2;
+}
+
+.top-row:hover {
+  background-color: lightgoldenrodyellow;
+}
+
 .slot {
   height: 95%;
   width: 54.5%;
   background-color: rgba(141, 141, 141, 0.5);
   border-radius: 50%;
+}
+
+.col1:hover ~ #top-col1 {
+  background-color: lightgoldenrodyellow;
+}
+
+.col2:hover ~ #top-col2 {
+  background-color: lightgoldenrodyellow;
+}
+
+.col3:hover ~ #top-col3 {
+  background-color: lightgoldenrodyellow;
+}
+
+.col4:hover ~ #top-col4 {
+  background-color: lightgoldenrodyellow;
+}
+
+.col5:hover ~ #top-col5 {
+  background-color: lightgoldenrodyellow;
+}
+
+.col6:hover ~ #top-col6 {
+  background-color: lightgoldenrodyellow;
+}
+
+.col7:hover ~ #top-col7 {
+  background-color: lightgoldenrodyellow;
 }
 
 #game1header {
