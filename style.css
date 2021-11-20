@@ -100,9 +100,9 @@ section {
   border-radius: 7px;
 }
 
-#game1footer {
+#game1-footer {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   height: 100%;
   width: 100%;
@@ -110,4 +110,9 @@ section {
   background-color: rgb(160, 160, 160);
   color: black;
   border-radius: 7px;
+}
+
+#game1-footer > div{
+  width: 35%;
+  text-align: center;
 }
