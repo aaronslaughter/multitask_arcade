@@ -20,12 +20,12 @@
 ***
 ### Screenshots:
 
-![Image](https://i.imgur.com/bI42Oir.png)
+![Image](https://i.imgur.com/fPK4Nee.png)
 
 
 ### Future Updates:
 - [ ] Landing Page
-- [ ] Connect 4 Game
+- [x] Connect 4 Game
 - [ ] Drive! Game
 - [ ] Side Scroller Game
 - [ ] Math Class Game
