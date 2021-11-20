@@ -30,14 +30,14 @@ class ConnectFour
     {
       if (this.playersTurn)
       {
-        document.querySelector('#game1-timer').innerText = parseInt(this.secondsRemaining);
+        document.querySelector('#game1-timer').innerText = Math.ceil(this.secondsRemaining);
       }
       else
       {
         document.querySelector('#game1-timer').innerText = 'Thinking...'
       }
       
-      if (this.secondsRemaining <= 0.4)
+      if (this.secondsRemaining <= 0.0)
       {
         this.playersTurn = false;
         this.secondsRemaining = 10;
@@ -138,20 +138,48 @@ class ConnectFour
 
   playerTurn = (lowestBlankRow, column) =>
   {
-    this.buttons[lowestBlankRow][column].style.backgroundColor = 'red';
-    this.grid[lowestBlankRow][column] = connectFourConstants.RED;
+    // stop the turn timer here
     this.playersTurn = false;
-    this.secondsRemaining = 10;
-    document.querySelector('#game1-turn').innerText = 'Computer\'s Turn';
-    document.querySelector('#game1-turn').style.color = 'black';
-    
-    // checkWin will flip the gameOver boolean if a win is found.
-    this.checkWin(this.grid[lowestBlankRow][column])
-    
-    window.setTimeout( () =>
+    // animate the token dropping
+    let animatePos = 0;
+    let animateDrop = window.setInterval(() =>
     {
-      this.computerTurn();
-    }, 2000)
+      if (lowestBlankRow > animatePos)
+      {
+        this.buttons[animatePos][column].style.backgroundColor = 'red';
+
+        if (animatePos > 0)
+        {
+          this.buttons[animatePos - 1][column].style.backgroundColor = '';
+        }
+        animatePos++;
+      }
+      else
+      {
+        window.clearInterval(animateDrop);
+
+        if (animatePos > 0)
+        {
+          this.buttons[animatePos - 1][column].style.backgroundColor = '';
+        }
+
+        // token actually gets placed
+        this.buttons[lowestBlankRow][column].style.backgroundColor = 'red';
+        this.grid[lowestBlankRow][column] = connectFourConstants.RED;
+        
+        this.secondsRemaining = 10;
+        document.querySelector('#game1-turn').innerText = 'Computer\'s Turn';
+        document.querySelector('#game1-turn').style.color = 'black';
+        
+        // checkWin will flip the gameOver boolean if a win is found.
+        this.checkWin(this.grid[lowestBlankRow][column])
+        
+        window.setTimeout( () =>
+        {
+          this.computerTurn();
+        }, 2000)
+      }
+    }, 150)
   }
 
   computerTurn = () =>
@@ -166,13 +194,37 @@ class ConnectFour
       }
   
       let lowestBlankRow = this.findLowestBlankRow(randomColumn);
-  
-      this.buttons[lowestBlankRow][randomColumn].style.backgroundColor = 'black';
-      this.grid[lowestBlankRow][randomColumn] = connectFourConstants.BLACK;
-      this.playersTurn = true;
-      document.querySelector('#game1-turn').innerText = 'Player\'s Turn';
-      document.querySelector('#game1-turn').style.color = 'red';
-      this.checkWin(this.grid[lowestBlankRow][randomColumn]);
+      let animatePos = 0;
+      let animateDrop = window.setInterval(() =>
+      {
+        if (lowestBlankRow > animatePos)
+        {
+          this.buttons[animatePos][randomColumn].style.backgroundColor = 'black';
+
+          if (animatePos > 0)
+          {
+            this.buttons[animatePos - 1][randomColumn].style.backgroundColor = '';
+          }
+          animatePos++;
+        }
+        else
+        {
+          window.clearInterval(animateDrop);
+
+          if (animatePos > 0)
+          {
+            this.buttons[animatePos - 1][randomColumn].style.backgroundColor = '';
+          }
+
+          this.buttons[lowestBlankRow][randomColumn].style.backgroundColor = 'black';
+          this.grid[lowestBlankRow][randomColumn] = connectFourConstants.BLACK;
+          this.playersTurn = true;
+          document.querySelector('#game1-turn').innerText = 'Player\'s Turn';
+          document.querySelector('#game1-turn').style.color = 'red';
+          this.checkWin(this.grid[lowestBlankRow][randomColumn]);
+
+        }
+      }, 150)
     }
   }
 
@@ -285,7 +337,6 @@ class ConnectFour
       document.querySelector('#game1-turn').style.color = 'red';
     }, 4000)
   }
-
 }
 
 const connectFour = new ConnectFour();
