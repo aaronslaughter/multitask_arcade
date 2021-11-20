@@ -25,7 +25,7 @@
 
 ### Future Updates:
 - [ ] Landing Page
-- [ ] Connect 3 Game
+- [ ] Connect 4 Game
 - [ ] Drive! Game
 - [ ] Side Scroller Game
 - [ ] Math Class Game
