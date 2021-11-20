@@ -28,7 +28,15 @@ class ConnectFour
 
     this.turnTimer = window.setInterval(() => 
     {
-      document.querySelector('#game1-timer').innerText = parseInt(this.secondsRemaining);
+      if (this.playersTurn)
+      {
+        document.querySelector('#game1-timer').innerText = parseInt(this.secondsRemaining);
+      }
+      else
+      {
+        document.querySelector('#game1-timer').innerText = 'Thinking...'
+      }
+      
       if (this.secondsRemaining <= 0.4)
       {
         this.playersTurn = false;
@@ -105,20 +113,7 @@ class ConnectFour
           {
             if (this.playersTurn)
             {
-              this.buttons[lowestBlankRow][j].style.backgroundColor = 'red';
-              this.grid[lowestBlankRow][j] = connectFourConstants.RED;
-              this.playersTurn = false;
-              this.secondsRemaining = 10;
-              document.querySelector('#game1-turn').innerText = 'Computer\'s Turn';
-              document.querySelector('#game1-turn').style.color = 'black';
-              
-              // checkWin will flip the gameOver boolean if a win is found.
-              this.checkWin(this.grid[lowestBlankRow][j])
-              
-              window.setTimeout( () =>
-              {
-                this.computerTurn();
-              }, 2000)
+              this.playerTurn(lowestBlankRow, j)
             }
           }
         })
@@ -139,6 +134,24 @@ class ConnectFour
     }
 
     return lowestOpenRow;
+  }
+
+  playerTurn = (lowestBlankRow, column) =>
+  {
+    this.buttons[lowestBlankRow][column].style.backgroundColor = 'red';
+    this.grid[lowestBlankRow][column] = connectFourConstants.RED;
+    this.playersTurn = false;
+    this.secondsRemaining = 10;
+    document.querySelector('#game1-turn').innerText = 'Computer\'s Turn';
+    document.querySelector('#game1-turn').style.color = 'black';
+    
+    // checkWin will flip the gameOver boolean if a win is found.
+    this.checkWin(this.grid[lowestBlankRow][column])
+    
+    window.setTimeout( () =>
+    {
+      this.computerTurn();
+    }, 2000)
   }
 
   computerTurn = () =>
@@ -244,11 +257,11 @@ class ConnectFour
       {
         if (!this.playersTurn)
         {
-          winningSlots[i].style.backgroundColor = 'pink';
+          winningSlots[i].style.backgroundColor = 'orange';
         }
         else
         {
-          winningSlots[i].style.backgroundColor = 'yellow';
+          winningSlots[i].style.backgroundColor = 'darkgreen';
         }
       }, 500 * i)
       
