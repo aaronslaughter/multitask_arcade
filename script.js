@@ -24,6 +24,37 @@ class ConnectFour
 
     this.playersTurn = true;
     this.gameOver = false;
+    this.secondsRemaining = 10;
+
+    this.turnTimer = window.setInterval(() => 
+    {
+      document.querySelector('#game1-timer').innerText = parseInt(this.secondsRemaining);
+      if (this.secondsRemaining <= 0.4)
+      {
+        this.playersTurn = false;
+        this.secondsRemaining = 10;
+        document.querySelector('#game1-turn').innerText = 'Computer\'s Turn';
+        document.querySelector('#game1-turn').style.color = 'black';
+        
+        window.setTimeout( () =>
+        {
+          this.computerTurn();
+        }, 2000)
+      }
+      else if (this.secondsRemaining < 5)
+      {
+        document.querySelector('#game1-timer').style.color = 'red';
+      }
+      else
+      {
+        document.querySelector('#game1-timer').style.color = 'black';
+      }
+
+      if (this.playersTurn)
+      {
+        this.secondsRemaining -= 0.1;
+      }
+    }, 100)
   }
 
   initGrid = () =>
@@ -77,12 +108,17 @@ class ConnectFour
               this.buttons[lowestBlankRow][j].style.backgroundColor = 'red';
               this.grid[lowestBlankRow][j] = connectFourConstants.RED;
               this.playersTurn = false;
+              this.secondsRemaining = 10;
+              document.querySelector('#game1-turn').innerText = 'Computer\'s Turn';
+              document.querySelector('#game1-turn').style.color = 'black';
               
               // checkWin will flip the gameOver boolean if a win is found.
-              if (this.checkWin(this.grid[lowestBlankRow][j]));
+              this.checkWin(this.grid[lowestBlankRow][j])
+              
+              window.setTimeout( () =>
               {
                 this.computerTurn();
-              }
+              }, 2000)
             }
           }
         })
@@ -121,6 +157,8 @@ class ConnectFour
       this.buttons[lowestBlankRow][randomColumn].style.backgroundColor = 'black';
       this.grid[lowestBlankRow][randomColumn] = connectFourConstants.BLACK;
       this.playersTurn = true;
+      document.querySelector('#game1-turn').innerText = 'Player\'s Turn';
+      document.querySelector('#game1-turn').style.color = 'red';
       this.checkWin(this.grid[lowestBlankRow][randomColumn]);
     }
   }
@@ -200,9 +238,6 @@ class ConnectFour
 
   resetGame = (winningSlots) =>
   {
-
-
-
     for (let i = 0; i < 4; i++)
     {
       window.setTimeout(() =>
@@ -213,7 +248,7 @@ class ConnectFour
         }
         else
         {
-          winningSlots[i].style.backgroundColor = 'green';
+          winningSlots[i].style.backgroundColor = 'yellow';
         }
       }, 500 * i)
       
@@ -232,6 +267,9 @@ class ConnectFour
 
       this.gameOver = false;
       this.playersTurn = true;
+      this.secondsRemaining = 10;
+      document.querySelector('#game1-turn').innerText = 'Player\'s Turn';
+      document.querySelector('#game1-turn').style.color = 'red';
     }, 4000)
   }
 
