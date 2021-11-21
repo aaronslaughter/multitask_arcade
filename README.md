@@ -32,4 +32,4 @@
 
 ### Credits:
 
-None yet!
+Image credit: [wallpaperaccess.com](https://wallpaperaccess.com/)
