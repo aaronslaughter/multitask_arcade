@@ -179,7 +179,7 @@ class ConnectFour
           this.computerTurn();
         }, 2000)
       }
-    }, 150)
+    }, 75)
   }
 
   computerTurn = () =>
@@ -224,7 +224,7 @@ class ConnectFour
           this.checkWin(this.grid[lowestBlankRow][randomColumn]);
 
         }
-      }, 150)
+      }, 75)
     }
   }
 
@@ -309,11 +309,11 @@ class ConnectFour
       {
         if (!this.playersTurn)
         {
-          winningSlots[i].style.backgroundColor = 'orange';
+          winningSlots[i].style.backgroundColor = 'green';
         }
         else
         {
-          winningSlots[i].style.backgroundColor = 'darkgreen';
+          winningSlots[i].style.backgroundColor = 'green';
         }
       }, 500 * i)
       
