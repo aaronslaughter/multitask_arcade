@@ -15,8 +15,8 @@ container {
   align-items: center;
   grid-template-rows: 1fr 1fr;
   grid-template-columns: 1fr 1fr;
-  height: 80vh;
-  width: 120vh;
+  height: 80vmin;
+  width: 120vmin;
   row-gap: 4%;
   column-gap: 4%;
   padding: 1%;
@@ -26,9 +26,6 @@ container {
 }
 
 section {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   height: 100%;
   width: 100%;
   background-color: lightyellow;
@@ -42,7 +39,6 @@ section {
   align-items:center;
   grid-template-rows: repeat(8, 1fr);
   grid-template-columns: repeat(7, 1fr);
-
   background-color: rgb(96, 96, 96);
 }
 
@@ -118,4 +114,64 @@ section {
 #game1-footer > div{
   width: 35%;
   text-align: center;
+}
+
+#window2 {
+  display: grid;
+  justify-items: center;
+  grid-template-rows: 1fr 3fr 1fr 1fr;
+  grid-template-columns: repeat(5, 1fr);
+  background-image: url("images/chalkboard.jpg");
+  background-size: cover;
+  font-size: 1.5em;
+}
+
+#game2header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  grid-column-start: span 5;
+  color: rgb(224, 219, 209);
+}
+
+#window2 > div {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  color: rgb(224, 219, 209);
+}
+
+.equation {
+  justify-content: center;
+}
+
+#game2footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  grid-column-start: 1;
+  grid-column-end: span 5;
+  color: rgb(224, 219, 209);
+}
+
+#answers {
+  grid-column-start: span 5;
+  justify-content: space-around;
+}
+
+#answers > div {
+  border-style: solid;
+  border-radius: 30%;
+  height: 60%;
+  width: 10%;
+  text-align: center;
+}
+
+#answers > div:hover {
+  background-color: green;
 }
