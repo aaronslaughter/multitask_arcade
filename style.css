@@ -59,6 +59,8 @@ section {
   width: 54.5%;
   background-color: rgba(141, 141, 141, 0.5);
   border-radius: 50%;
+  border-style: solid;
+  border-width: 1px;
 }
 
 .col1:hover ~ #top-col1 {
