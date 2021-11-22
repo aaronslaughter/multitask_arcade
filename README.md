@@ -20,7 +20,7 @@
 ***
 ### Screenshots:
 
-![Image](https://i.imgur.com/fPK4Nee.png)
+![Image](https://i.imgur.com/agt2lqm.png)
 
 
 ### Future Updates:
@@ -28,8 +28,9 @@
 - [x] Connect 4 Game
 - [ ] Drive! Game
 - [ ] Side Scroller Game
-- [ ] Math Class Game
+- [x] Math Class Game
 
 ### Credits:
 
 Image credit: [wallpaperaccess.com](https://wallpaperaccess.com/)
+Audio credit: [freesound.org](https://freesound.org)
