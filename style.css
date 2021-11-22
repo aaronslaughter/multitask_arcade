@@ -4,6 +4,7 @@ body {
   flex-direction: column;
   background-color:thistle;
   user-select: none;
+  font-family: 'Righteous', cursive;
 }
 
 heading {
