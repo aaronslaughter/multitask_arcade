@@ -353,6 +353,8 @@ class MathClass {
   range = 10;
   equation = new Array();
   roundOver = true;
+  turnTimer;
+  secondsRemaining = 10;
 
   constructor()
   {
@@ -361,6 +363,43 @@ class MathClass {
     this.initEquation();
     this.createEquation();
     this.displayEquation();
+
+    this.turnTimer = window.setInterval(() => 
+    {
+      if (!this.roundOver)
+      {
+        document.querySelector('#game2footer').innerText = Math.ceil(this.secondsRemaining);
+      }
+      else
+      {
+        document.querySelector('#game2footer').innerText = 'Calculating...'
+      }
+      
+      if (this.secondsRemaining <= 0.0)
+      {
+        this.roundOver = true;
+        this.secondsRemaining = 10;
+        this.correctButton.style.backgroundColor = 'green';
+        
+        window.setTimeout( () =>
+        {
+          this.resetBoard();
+        }, 2000)
+      }
+      else if (this.secondsRemaining < 5)
+      {
+        document.querySelector('#game2footer').style.color = 'red';
+      }
+      else
+      {
+        document.querySelector('#game2footer').style.color = 'rgb(224, 219, 209)';
+      }
+
+      if (!this.roundOver)
+      {
+        this.secondsRemaining -= 0.1;
+      }
+    }, 100)
   }
 
   initButtons()
@@ -377,14 +416,12 @@ class MathClass {
     {
       this.buttons[i].addEventListener('click', () =>
       {
-        // TODO
-        // check answer is correct
-        // award points, etc.
 
         if (this.buttons[i] === this.correctButton && !this.roundOver)
         {
           this.roundOver = true;
           this.buttons[i].style.backgroundColor = 'green';
+          this.secondsRemaining = 10;
           window.setTimeout( () => {this.resetBoard()}, 2000);
         }
         else if (this.buttons[i] != this.correctButton && !this.roundOver)
@@ -392,6 +429,7 @@ class MathClass {
           this.roundOver = true;
           this.buttons[i].style.backgroundColor = 'red';
           this.correctButton.style.backgroundColor = 'green';
+          this.secondsRemaining = 10;
           window.setTimeout( () => {this.resetBoard()}, 2000);
           
         }
@@ -450,7 +488,6 @@ class MathClass {
       this.wrongAnswers.push((this.parameter1 * -1) - (this.parameter2 * -1)); 
     }
 
-    console.log(this.wrongAnswers);
   }
 
   displayEquation()
@@ -485,7 +522,11 @@ class MathClass {
       }
     }
 
-    this.range ++;
+    if (this.range < 20)
+    {
+      this.range ++;
+    }
+    
     this.roundOver = false;
     
   }
@@ -504,6 +545,7 @@ class MathClass {
       this.buttons[i].style.backgroundColor = '';
     }
 
+    
     this.createEquation();
     this.displayEquation();
     
