@@ -1,4 +1,11 @@
-///////// CONNECT 4 ////////////
+const sounds =
+{
+  click: document.getElementById('audio_click'),
+  ding: document.getElementById('audio_ding'),
+  buzzer: document.getElementById('audio_buzzer')
+}
+
+///////// CONNECT 4 //////////////////////////////////////
 
 const connectFourConstants =
 {
@@ -139,6 +146,7 @@ class ConnectFour
     // stop the turn timer here
     this.playersTurn = false;
     // animate the token dropping
+    sounds.click.play();
     let animatePos = 0;
     let animateDrop = window.setInterval(() =>
     {
@@ -192,6 +200,7 @@ class ConnectFour
       }
   
       let lowestBlankRow = this.findLowestBlankRow(randomColumn);
+      sounds.click.play();
       let animatePos = 0;
       let animateDrop = window.setInterval(() =>
       {
@@ -240,6 +249,7 @@ class ConnectFour
         {
           this.gameOver = true;
           this.resetGame([this.buttons[i][j], this.buttons[i+1][j], this.buttons[i+2][j], this.buttons[i+3][j]]);
+          sounds.ding.play();
           return true;
         }
       }
@@ -257,6 +267,7 @@ class ConnectFour
         {
           this.gameOver = true;
           this.resetGame([this.buttons[i][j], this.buttons[i][j+1], this.buttons[i][j+2], this.buttons[i][j+3]]);
+          sounds.ding.play();
           return true;
         }
       }
@@ -274,6 +285,7 @@ class ConnectFour
         {
           this.gameOver = true;
           this.resetGame([this.buttons[i][j], this.buttons[i+1][j+1], this.buttons[i+2][j+2], this.buttons[i+3][j+3]]);
+          sounds.ding.play();
           return true;
         }
       }
@@ -291,6 +303,7 @@ class ConnectFour
         {
           this.gameOver = true;
           this.resetGame([this.buttons[i][j], this.buttons[i-1][j+1], this.buttons[i-2][j+2], this.buttons[i-3][j+3]]);
+          sounds.ding.play();
           return true;
         }
       }
@@ -337,9 +350,9 @@ class ConnectFour
   }
 }
 
-/////////////////////////////////
+//////////////////////////////////////////////////////////
 
-///////// MATH CLASS ////////////
+///////// MATH CLASS /////////////////////////////////////
 
 class MathClass {
   parameter1;
@@ -379,6 +392,7 @@ class MathClass {
       {
         this.roundOver = true;
         this.secondsRemaining = 10;
+        sounds.buzzer.play();
         this.correctButton.style.backgroundColor = 'green';
         
         window.setTimeout( () =>
@@ -422,6 +436,7 @@ class MathClass {
           this.roundOver = true;
           this.buttons[i].style.backgroundColor = 'green';
           this.secondsRemaining = 10;
+          sounds.ding.play();
           window.setTimeout( () => {this.resetBoard()}, 2000);
         }
         else if (this.buttons[i] != this.correctButton && !this.roundOver)
@@ -430,6 +445,7 @@ class MathClass {
           this.buttons[i].style.backgroundColor = 'red';
           this.correctButton.style.backgroundColor = 'green';
           this.secondsRemaining = 10;
+          sounds.buzzer.play();
           window.setTimeout( () => {this.resetBoard()}, 2000);
           
         }
