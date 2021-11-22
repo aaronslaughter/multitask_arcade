@@ -192,25 +192,28 @@ class ConnectFour
   {
     if (!this.gameOver)
     {
-      let randomColumn = Math.floor(Math.random() * connectFourConstants.NUM_COLS);
 
-      while(this.findLowestBlankRow(randomColumn) < 0)
-      {
-        randomColumn = Math.floor(Math.random() * connectFourConstants.NUM_COLS);
-      }
+      let smartColumn = this.chooseSmartColumn()
+
+      // let randomColumn = Math.floor(Math.random() * connectFourConstants.NUM_COLS);
+
+      // while(this.findLowestBlankRow(randomColumn) < 0)
+      // {
+      //   randomColumn = Math.floor(Math.random() * connectFourConstants.NUM_COLS);
+      // }
   
-      let lowestBlankRow = this.findLowestBlankRow(randomColumn);
+      let lowestBlankRow = this.findLowestBlankRow(smartColumn);
       sounds.click.play();
       let animatePos = 0;
       let animateDrop = window.setInterval(() =>
       {
         if (lowestBlankRow > animatePos)
         {
-          this.buttons[animatePos][randomColumn].style.backgroundColor = 'black';
+          this.buttons[animatePos][smartColumn].style.backgroundColor = 'black';
 
           if (animatePos > 0)
           {
-            this.buttons[animatePos - 1][randomColumn].style.backgroundColor = '';
+            this.buttons[animatePos - 1][smartColumn].style.backgroundColor = '';
           }
           animatePos++;
         }
@@ -220,15 +223,15 @@ class ConnectFour
 
           if (animatePos > 0)
           {
-            this.buttons[animatePos - 1][randomColumn].style.backgroundColor = '';
+            this.buttons[animatePos - 1][smartColumn].style.backgroundColor = '';
           }
 
-          this.buttons[lowestBlankRow][randomColumn].style.backgroundColor = 'black';
-          this.grid[lowestBlankRow][randomColumn] = connectFourConstants.BLACK;
+          this.buttons[lowestBlankRow][smartColumn].style.backgroundColor = 'black';
+          this.grid[lowestBlankRow][smartColumn] = connectFourConstants.BLACK;
           this.playersTurn = true;
           document.querySelector('#game1-turn').innerText = 'Player\'s Turn';
           document.querySelector('#game1-turn').style.color = 'red';
-          this.checkWin(this.grid[lowestBlankRow][randomColumn]);
+          this.checkWin(this.grid[lowestBlankRow][smartColumn]);
 
         }
       }, 75)
@@ -247,9 +250,7 @@ class ConnectFour
         this.grid[i+2][j] === potentialWinner &&
         this.grid[i+3][j] === potentialWinner)
         {
-          this.gameOver = true;
           this.resetGame([this.buttons[i][j], this.buttons[i+1][j], this.buttons[i+2][j], this.buttons[i+3][j]]);
-          sounds.ding.play();
           return true;
         }
       }
@@ -265,9 +266,7 @@ class ConnectFour
         this.grid[i][j + 2] === potentialWinner &&
         this.grid[i][j + 3] === potentialWinner)
         {
-          this.gameOver = true;
           this.resetGame([this.buttons[i][j], this.buttons[i][j+1], this.buttons[i][j+2], this.buttons[i][j+3]]);
-          sounds.ding.play();
           return true;
         }
       }
@@ -283,9 +282,7 @@ class ConnectFour
         this.grid[i + 2][j + 2] === potentialWinner &&
         this.grid[i + 3][j + 3] === potentialWinner)
         {
-          this.gameOver = true;
           this.resetGame([this.buttons[i][j], this.buttons[i+1][j+1], this.buttons[i+2][j+2], this.buttons[i+3][j+3]]);
-          sounds.ding.play();
           return true;
         }
       }
@@ -301,9 +298,73 @@ class ConnectFour
         this.grid[i - 2][j + 2] === potentialWinner &&
         this.grid[i - 3][j + 3] === potentialWinner)
         {
-          this.gameOver = true;
           this.resetGame([this.buttons[i][j], this.buttons[i-1][j+1], this.buttons[i-2][j+2], this.buttons[i-3][j+3]]);
-          sounds.ding.play();
+          return true;
+        }
+      }
+    }
+
+    return false;
+  }
+
+  // used by the AI to look for good spots
+  checkWinLogic = (grid, potentialWinner) =>
+  {
+    // checks the verticals
+    for (let i = 0; i < connectFourConstants.NUM_ROWS-3; i++)
+    {
+      for (let j = 0; j < connectFourConstants.NUM_COLS; j++)
+      {
+        if (grid[i][j] === potentialWinner &&
+        grid[i+1][j] === potentialWinner &&
+        grid[i+2][j] === potentialWinner &&
+        grid[i+3][j] === potentialWinner)
+        {
+          return true;
+        }
+      }
+    }
+
+    // checks the horizontals
+    for (let i = 0; i < connectFourConstants.NUM_ROWS; i++)
+    {
+      for (let j = 0; j < connectFourConstants.NUM_COLS-3; j++)
+      {
+        if (grid[i][j] === potentialWinner &&
+        grid[i][j + 1] === potentialWinner &&
+        grid[i][j + 2] === potentialWinner &&
+        grid[i][j + 3] === potentialWinner)
+        {
+          return true;
+        }
+      }
+    }
+
+    // checks the ascending diagonals, 'ascending' from the perspective of the origin in the top left
+    for (let i = 0; i < connectFourConstants.NUM_ROWS-3; i++)
+    {
+      for (let j = 0; j < connectFourConstants.NUM_COLS-3; j++)
+      {
+        if (grid[i][j] === potentialWinner &&
+        grid[i + 1][j + 1] === potentialWinner &&
+        grid[i + 2][j + 2] === potentialWinner &&
+        grid[i + 3][j + 3] === potentialWinner)
+        {
+          return true;
+        }
+      }
+    }
+
+    // checked the descending diagonals, 'descending' from the perspective of the origin in the top left
+    for (let i = 3; i < connectFourConstants.NUM_ROWS; i++)
+    {
+      for (let j = 0; j < connectFourConstants.NUM_COLS-3; j++)
+      {
+        if (grid[i][j] === potentialWinner &&
+        grid[i - 1][j + 1] === potentialWinner &&
+        grid[i - 2][j + 2] === potentialWinner &&
+        grid[i - 3][j + 3] === potentialWinner)
+        {
           return true;
         }
       }
@@ -314,6 +375,9 @@ class ConnectFour
 
   resetGame = (winningSlots) =>
   {
+
+    this.gameOver = true;
+    sounds.ding.play();
     for (let i = 0; i < 4; i++)
     {
       window.setTimeout(() =>
@@ -347,6 +411,75 @@ class ConnectFour
       document.querySelector('#game1-turn').innerText = 'Player\'s Turn';
       document.querySelector('#game1-turn').style.color = 'red';
     }, 4000)
+  }
+
+  // AI Goals:
+  // 1. Complete 4 in a row
+  // 2. Block the players 4 in a row
+  // 3. Otherwise choose a random column
+  chooseSmartColumn()
+  {
+
+    // duplicate the existing grid
+    let tempGrid = new Array();
+    for (let i = 0; i < connectFourConstants.NUM_ROWS; i++)
+    {
+      tempGrid[i] = new Array(connectFourConstants.NUM_COLS);
+      for (let j = 0; j < connectFourConstants.NUM_COLS; j++)
+      {
+        tempGrid[i][j] = this.grid[i][j];
+      }
+    }
+
+
+    // for each column, add a computer piece to the column and see if it's a winner
+    for (let i = 0; i < connectFourConstants.NUM_COLS; i++)
+    {
+      let lowestBlankRow = this.findLowestBlankRow(i);
+
+      if (lowestBlankRow >= 0)
+      {
+        tempGrid[lowestBlankRow][i] = connectFourConstants.BLACK;
+
+        if (this.checkWinLogic(tempGrid, connectFourConstants.BLACK))
+        {
+          return i;
+        }
+        else
+        {
+          tempGrid[lowestBlankRow][i] = connectFourConstants.BLANK;
+        }
+      }
+    }
+
+    // for each column, add a player piece to the column and see if it's a winner
+    for (let i = 0; i < connectFourConstants.NUM_COLS; i++)
+    {
+      let lowestBlankRow = this.findLowestBlankRow(i);
+      if (lowestBlankRow >= 0)
+      {
+        tempGrid[lowestBlankRow][i] = connectFourConstants.RED;
+
+        if (this.checkWinLogic(tempGrid, connectFourConstants.RED))
+        {
+          return i;
+        }
+        else
+        {
+          tempGrid[lowestBlankRow][i] = connectFourConstants.BLANK;
+        }
+      }
+    }
+
+    // no good column found so just pick a random one
+    let randomColumn = Math.floor(Math.random() * connectFourConstants.NUM_COLS);
+
+    while(this.findLowestBlankRow(randomColumn) < 0)
+    {
+      randomColumn = Math.floor(Math.random() * connectFourConstants.NUM_COLS);
+    }
+
+    return randomColumn;
   }
 }
 
@@ -385,7 +518,7 @@ class MathClass {
       }
       else
       {
-        document.querySelector('#game2footer').innerText = 'Calculating...'
+        document.querySelector('#game2footer').innerText = 'Calculating...';
       }
       
       if (this.secondsRemaining <= 0.0)
@@ -491,16 +624,16 @@ class MathClass {
       this.correctAnswer = this.parameter1 - this.parameter2;
     }
 
-    if (this.currentOperator === '+') // -2
+    if (this.currentOperator === '+')
     {
-      this.wrongAnswers.push(this.parameter1 + (this.parameter2 * -1)); // 16
-      this.wrongAnswers.push((this.parameter1 * -1) + this.parameter2); // 
+      this.wrongAnswers.push(this.parameter1 + (this.parameter2 * -1));
+      this.wrongAnswers.push((this.parameter1 * -1) + this.parameter2); 
       this.wrongAnswers.push((this.parameter1 * -1) + (this.parameter2 * -1));
     }
     else if (this.currentOperator === '-')
     {
-      this.wrongAnswers.push(this.parameter1 - (this.parameter2 * -1)); // -1
-      this.wrongAnswers.push((this.parameter1 * -1) - this.parameter2); // 1
+      this.wrongAnswers.push(this.parameter1 - (this.parameter2 * -1));
+      this.wrongAnswers.push((this.parameter1 * -1) - this.parameter2);
       this.wrongAnswers.push((this.parameter1 * -1) - (this.parameter2 * -1)); 
     }
 
