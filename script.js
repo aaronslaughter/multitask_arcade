@@ -1,9 +1,10 @@
-const sounds =
+let sounds =
 {
   click: document.getElementById('audio_click'),
   ding: document.getElementById('audio_ding'),
   buzzer: document.getElementById('audio_buzzer')
 }
+sounds.buzzer.volume = 0.2;
 
 ///////// CONNECT 4 //////////////////////////////////////
 
