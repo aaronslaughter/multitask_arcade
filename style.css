@@ -3,10 +3,12 @@ body {
   align-items: center;
   flex-direction: column;
   background-color:thistle;
+  user-select: none;
 }
 
 heading {
   color: white;
+  height: 10vh;
 }
 
 container {
@@ -40,6 +42,7 @@ section {
   grid-template-rows: repeat(8, 1fr);
   grid-template-columns: repeat(7, 1fr);
   background-color: rgb(96, 96, 96);
+  font-size: 90%;
 }
 
 .top-row {
@@ -119,11 +122,11 @@ section {
 #window2 {
   display: grid;
   justify-items: center;
-  grid-template-rows: 1fr 3fr 1fr 1fr;
+  grid-template-rows: 1fr 3fr 1fr 2fr;
   grid-template-columns: repeat(5, 1fr);
   background-image: url("images/chalkboard.jpg");
   background-size: cover;
-  font-size: 1.5em;
+  font-size: 1.5rem;
 }
 
 #game2header {
@@ -173,5 +176,7 @@ section {
 }
 
 #answers > div:hover {
-  background-color: green;
+  background-color: rgb(224, 219, 209);
+  color: rgb(79, 83, 88);
+
 }
