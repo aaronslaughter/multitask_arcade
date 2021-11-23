@@ -252,6 +252,16 @@ class ConnectFour
         this.grid[i+3][j] === potentialWinner)
         {
           this.resetGame([this.buttons[i][j], this.buttons[i+1][j], this.buttons[i+2][j], this.buttons[i+3][j]]);
+
+          if (potentialWinner === connectFourConstants.RED)
+          {
+            sounds.ding.play();
+          }
+          else
+          {
+            sounds.buzzer.play();
+          }
+
           return true;
         }
       }
@@ -268,6 +278,16 @@ class ConnectFour
         this.grid[i][j + 3] === potentialWinner)
         {
           this.resetGame([this.buttons[i][j], this.buttons[i][j+1], this.buttons[i][j+2], this.buttons[i][j+3]]);
+
+          if (potentialWinner === connectFourConstants.RED)
+          {
+            sounds.ding.play();
+          }
+          else
+          {
+            sounds.buzzer.play();
+          }
+          
           return true;
         }
       }
@@ -284,6 +304,16 @@ class ConnectFour
         this.grid[i + 3][j + 3] === potentialWinner)
         {
           this.resetGame([this.buttons[i][j], this.buttons[i+1][j+1], this.buttons[i+2][j+2], this.buttons[i+3][j+3]]);
+
+          if (potentialWinner === connectFourConstants.RED)
+          {
+            sounds.ding.play();
+          }
+          else
+          {
+            sounds.buzzer.play();
+          }
+
           return true;
         }
       }
@@ -300,6 +330,16 @@ class ConnectFour
         this.grid[i - 3][j + 3] === potentialWinner)
         {
           this.resetGame([this.buttons[i][j], this.buttons[i-1][j+1], this.buttons[i-2][j+2], this.buttons[i-3][j+3]]);
+
+          if (potentialWinner === connectFourConstants.RED)
+          {
+            sounds.ding.play();
+          }
+          else
+          {
+            sounds.buzzer.play();
+          }
+
           return true;
         }
       }
@@ -378,7 +418,6 @@ class ConnectFour
   {
 
     this.gameOver = true;
-    sounds.ding.play();
     for (let i = 0; i < 4; i++)
     {
       window.setTimeout(() =>
