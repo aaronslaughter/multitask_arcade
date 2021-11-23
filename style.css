@@ -7,8 +7,35 @@ body {
   font-family: 'Righteous', cursive;
 }
 
-heading {
+h1 {
+  color: lightcoral;
+  font-size: 36pt;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+}
+
+p {
+  font-size: 24pt;
+}
+
+a {
+  text-decoration: none;
+  font-size: 36pt;
+  color: lightcoral;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+}
+
+a:hover {
+  font-size: 48pt;
   color: white;
+}
+
+heading {
+  color: lightcoral;
+  font-size: 18pt;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
   height: 10vh;
 }
 
