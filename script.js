@@ -255,11 +255,17 @@ class ConnectFour
 
           if (potentialWinner === connectFourConstants.RED)
           {
+            sounds.ding.pause();
+            sounds.ding.currentTime = 0;
             sounds.ding.play();
+            score += 10;
           }
           else
           {
+            sounds.buzzer.pause();
+            sounds.buzzer.currentTime = 0;
             sounds.buzzer.play();
+            score -= 10;
           }
 
           return true;
@@ -281,11 +287,17 @@ class ConnectFour
 
           if (potentialWinner === connectFourConstants.RED)
           {
+            sounds.ding.pause();
+            sounds.ding.currentTime = 0;
             sounds.ding.play();
+            score += 10;
           }
           else
           {
+            sounds.buzzer.pause();
+            sounds.buzzer.currentTime = 0;
             sounds.buzzer.play();
+            score -= 10;
           }
           
           return true;
@@ -307,11 +319,17 @@ class ConnectFour
 
           if (potentialWinner === connectFourConstants.RED)
           {
+            sounds.ding.pause();
+            sounds.ding.currentTime = 0;
             sounds.ding.play();
+            score += 10;
           }
           else
           {
+            sounds.buzzer.pause();
+            sounds.buzzer.currentTime = 0;
             sounds.buzzer.play();
+            score -= 10;
           }
 
           return true;
@@ -333,11 +351,17 @@ class ConnectFour
 
           if (potentialWinner === connectFourConstants.RED)
           {
+            sounds.ding.pause();
+            sounds.ding.currentTime = 0;
             sounds.ding.play();
+            score += 10;
           }
           else
           {
+            sounds.buzzer.pause();
+            sounds.buzzer.currentTime = 0;
             sounds.buzzer.play();
+            score -= 10;
           }
 
           return true;
@@ -565,7 +589,10 @@ class MathClass {
       {
         this.roundOver = true;
         this.secondsRemaining = 10;
+        sounds.buzzer.pause();
+        sounds.buzzer.currentTime = 0;
         sounds.buzzer.play();
+        score--;
         this.correctButton.style.backgroundColor = 'green';
         
         window.setTimeout( () =>
@@ -609,7 +636,10 @@ class MathClass {
           this.roundOver = true;
           this.buttons[i].style.backgroundColor = 'green';
           this.secondsRemaining = 10;
+          sounds.ding.pause();
+          sounds.ding.currentTime = 0;
           sounds.ding.play();
+          score++;
           window.setTimeout( () => {this.resetBoard()}, 2000);
         }
         else if (this.buttons[i] != this.correctButton && !this.roundOver)
@@ -618,7 +648,10 @@ class MathClass {
           this.buttons[i].style.backgroundColor = 'red';
           this.correctButton.style.backgroundColor = 'green';
           this.secondsRemaining = 10;
+          sounds.buzzer.pause();
+          sounds.buzzer.currentTime = 0;
           sounds.buzzer.play();
+          score--;
           window.setTimeout( () => {this.resetBoard()}, 2000);
           
         }
@@ -740,6 +773,13 @@ class MathClass {
     
   }
 }
+
+let score = 0;
+let scoreRefresh = window.setInterval( () =>
+{
+  document.querySelector('score').innerText = "Score: " + score;
+}, 100)
+
 
 const connectFour = new ConnectFour();
 const mathClass = new MathClass();
