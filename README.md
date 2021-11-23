@@ -24,7 +24,7 @@
 
 
 ### Future Updates:
-- [ ] Landing Page
+- [x] Landing Page
 - [x] Connect 4 Game
 - [ ] Drive! Game
 - [ ] Side Scroller Game
@@ -33,4 +33,5 @@
 ### Credits:
 
 Image credit: [wallpaperaccess.com](https://wallpaperaccess.com/)
+
 Audio credit: [freesound.org](https://freesound.org)
