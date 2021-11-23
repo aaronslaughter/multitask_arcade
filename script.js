@@ -195,13 +195,6 @@ class ConnectFour
     {
 
       let smartColumn = this.chooseSmartColumn()
-
-      // let randomColumn = Math.floor(Math.random() * connectFourConstants.NUM_COLS);
-
-      // while(this.findLowestBlankRow(randomColumn) < 0)
-      // {
-      //   randomColumn = Math.floor(Math.random() * connectFourConstants.NUM_COLS);
-      // }
   
       let lowestBlankRow = this.findLowestBlankRow(smartColumn);
       sounds.click.play();
