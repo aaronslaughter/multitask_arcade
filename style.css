@@ -1,7 +1,10 @@
 body {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-rows: 1fr 2fr 2fr 2fr 2fr;
+  justify-content: center;
+  justify-items: center;
+
   background-color:thistle;
   user-select: none;
   font-family: 'Righteous', cursive;
@@ -12,10 +15,16 @@ h1 {
   font-size: 36pt;
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: black;
+  grid-column-start: span 3;
 }
 
 p {
   font-size: 24pt;
+  grid-column-start: 2;
+}
+
+nav {
+  grid-column-start: 2;
 }
 
 a {
@@ -48,6 +57,11 @@ heading {
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: black;
   height: 10vh;
+  grid-column-start: span 3;
+}
+
+score {
+  font-size: 18pt;
 }
 
 container {
@@ -64,6 +78,9 @@ container {
   background-color: lightcoral;
   border-style: solid;
   border-radius: 10px;
+  grid-column-start: 2;
+  grid-row-start: 2;
+  grid-row-end: 8;
 }
 
 section {
