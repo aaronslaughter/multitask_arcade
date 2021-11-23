@@ -29,6 +29,17 @@ a {
 a:hover {
   font-size: 48pt;
   color: white;
+  animation: grow 0.5s;
+}
+
+@keyframes grow {
+  from {
+    font-size: 36pt;
+  }
+  to {
+    font-size: 48pt;
+  }
+  
 }
 
 heading {
