@@ -17,10 +17,12 @@
 ### Getting Started:
 * Clone this repository
 * Run index.html in your browser of choice
+
+### Or visit - [multitask-arcade.surge.sh](https://multitask-arcade.surge.sh/arcade.html)
 ***
 ### Screenshots:
 
-![Image](https://i.imgur.com/agt2lqm.png)
+![Image](https://i.imgur.com/04Cq8uv.png)
 
 
 ### Future Updates:
@@ -32,6 +34,6 @@
 
 ### Credits:
 
-Image credit: [wallpaperaccess.com](https://wallpaperaccess.com/)
+Image credit: [ppt-backgrounds.net](https://www.ppt-backgrounds.net//)
 
 Audio credit: [freesound.org](https://freesound.org)
